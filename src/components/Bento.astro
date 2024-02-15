@@ -1,0 +1,25 @@
+---
+import BentoItem from './BentoItem.astro'
+---
+
+<section
+ class={`
+    w-full max-w-[1024px]
+    grid grid-cols-12 auto-rows-[30rem] gap-4
+    mx-auto p-20 md:pt-32 
+ `}
+>
+
+    <BentoItem class='col-span-12 md:col-span-8' title='Lorem Ipsum Dolor Sit Amet Consecteur SAIDREXXX'>
+        <div slot="image" class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover bg-no-repeat" style="background-image: url('/public/bento-woman.webp')">
+            
+        </div>
+        <p slot="content">Subtitle</p>
+    </BentoItem>
+    <BentoItem class='col-span-12 md:col-span-4' title='Lorem Ipsum Dolor Sit Amet Consecteur SAIDREXXX'/>
+    <BentoItem class='col-span-12 md:col-span-8' title='Lorem Ipsum Dolor Sit Amet Consecteur SAIDREXXX'/>
+    <BentoItem class='col-span-12 md:col-span-4' title='Lorem Ipsum Dolor Sit Amet Consecteur SAIDREXXX'/>
+    
+
+    
+</section>
