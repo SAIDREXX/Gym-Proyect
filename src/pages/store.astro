@@ -1,7 +1,29 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import NavBar from '../components/NavBar.astro';
+import StoreItem from '../components/StoreItem.astro';
+import { client } from '../db/client';
+const { rows } = await client.execute('SELECT * from merch '); 
+
 ---
 
 <Layout title='Tienda Oficial'>
-
+    <main class="text-white">
+        <NavBar/>
+        
+    </main>
+    <body>
+        <section class="mt-28 px-4 text-white grid grid-cols-5 gap-4">
+            {
+                
+                rows.map((item) => (
+                    <StoreItem 
+                    name={String(item.name)} 
+                    price={String(item.price)} 
+                    description={String(item.description)} 
+                    image={String(item.image)} />
+                ))
+            }
+        </section>
+    </body>
 </Layout>

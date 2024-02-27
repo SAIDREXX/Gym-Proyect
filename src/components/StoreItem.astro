@@ -1,15 +1,30 @@
 ---
 interface Props {
-	title: string;
-	body: string;
-	href: string;
+	name: string;
+	price: string;
+	description: string;
+	image: string;
 }
 
-const { href, title, body } = Astro.props;
+const { name, price, description, image } = Astro.props;
 ---
-<article>
-	<div>
-		
-	</div>
+<article
+class= {`
+	${Astro.props.class}
+	relative rounded-xl
+	backdrop-blur-sm
+	border border-black/10
+	shadow-inner shadow-white/10
+	overflow-hidden
+	group
+	`}
+
+>
+<slot name="image" />
+<div class="select-none flex flex-col gap-1 p-6 text-lg z-20 h-full bg-white">
+    <h2 class="text-black">{name}</h2>
+           
+    <slot name="content" />
+</div>
 </article>
 
