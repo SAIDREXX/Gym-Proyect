@@ -2,30 +2,32 @@
 interface Props {
     class?: string;
     title?: string;
-    subtitle?: string;
+    title_alternative?: string;
+    href?: string;
+    
 
 }
 
-const { title, subtitle } = Astro.props;
+const { title, title_alternative, href } = Astro.props;
+
 ---
 
 <article
  class= {`
  ${Astro.props.class}
  relative rounded-xl
- backdrop-blur-sm
- border border-black/10
- shadow-inner shadow-white/10
- overflow-hidden
+ overflow-hidden duration-200 transition-transform hover:scale-105 ease-in-out
  group
  `}
 >
     
-<slot name="image" />
-<div class="select-none flex flex-col gap-1 p-6 text-lg z-20 h-full">
-    <h2>{title}</h2>
-    {subtitle && <h3>{subtitle}</h3>}        
-    <slot name="content" />
+<a href={href}>
+    <slot name="image" />
+    <div class="flex flex-row select-none gap-3 p-6 text-lg z-20 h-full items-center justify-center bg-[#2C2E33]">
+    <h2 class="font-bold text-3xl tracking-wide">{title}</h2> <h2 class="font-bold text-3xl tracking-wide text-[#FF3E01]">{title_alternative}</h2>        
+    <slot class="..." name="content" />
+    
 </div>
+</a>
 
 </article>

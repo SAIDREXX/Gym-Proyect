@@ -1,8 +1,8 @@
-<header class="py-6 px-10 flex items-center fixed top-0 w-full justify-between">
+<header class="py-6 px-10 flex items-center fixed top-0 z-20 w-full justify-between backdrop-blur-[2px]">
     <!--SVG -->
     <div>
         <a href="/">
-            <svg class="w-16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="gym">
+            <svg class="md:w-16 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="gym">
                 <g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10">
                     <path d="M11.143 23.145L.855 12.857a1.212 1.212 0 0 1 0-1.714L11.143.855a1.212 1.212 0 0 1 1.714 0l10.288 10.288a1.212 1.212 0 0 1 0 1.714L12.857 23.145a1.212 1.212 0 0 1-1.714 0z">
                     </path>
@@ -15,7 +15,8 @@
     </div>
 
     <nav>
-        <ul class="flex gap-10 [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2 items-center">
+        <ul class="flex md:gap-10 md:[&>li>a]:inline-block md:[&>li>a]:px-4 md:[&>li>a]:py-2 md:items-center 
+                gap-6 [&>li>a]:inline-block [&>li>a]:px-1 [&>li>a]:py-2">
             <li><a class="hover:bg-slate-100/25 hover:rounded-full" href="/store">Tienda</a></li>
             <li><a class="bg-red-700 rounded-full" href="#">¡Comienza Ya!</a></li>
             <li><a href="#">

@@ -2,12 +2,30 @@
 import Layout from '../layouts/Layout.astro';
 import NavigationBar from '../components/NavBar.astro';
 import Bento from '../components/Bento.astro';
+import Membership from '../components/MembershipBento.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="Bienvenido">
 	<main class="text-white">
 		<NavigationBar/>
-		<Bento/>
+		<section id="bento">
+			<Bento/>
+		</section>
+
+		<section id="membership" class="h-screen">
+			
+			<Membership/>
+		</section>
+		<!-- TODO: Crear esta sección -->
+		<section id="about" class="h-screen">
+			<a href="#bento"> <h2 class="text-white"> About</h2></a>
+		</section>
+		<!-- TODO: Crear esta sección -->
+		<section id="nutrition" class="h-screen">
+			<a href="#bento"> <h2 class="text-white"> Nutrittion</h2></a>
+		</section>
 	</main>
+	<Footer/>
 </Layout>
 

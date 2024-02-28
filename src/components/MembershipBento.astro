@@ -1,0 +1,40 @@
+---
+import MembershipCard from "./MembershipCard.astro"
+---
+
+<section 
+class={`
+    md:w-full md:h-screen 
+    md:grid md:grid-cols-3 md:grid-rows-1 md:gap-4
+    md:mx-auto md:p-20 md:pt-32 
+
+    w-full h-screen
+    grid grid-cols-4 grid-rows-3 gap-4
+    pt-24 
+ `}
+>
+    <MembershipCard>
+        <div slot="image" 
+        class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover" 
+        style="background-image: url('membership_tier_1.webp'); background-position: center; opacity: 0.6;">
+
+        </div>
+    </MembershipCard>
+
+    <MembershipCard>
+        <div slot="image" 
+        class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover" 
+        style="background-image: url('membership_tier_2.webp'); background-position: center; opacity: 0.6;">
+
+        </div>
+    </MembershipCard>
+
+    <MembershipCard>
+        <div slot="image" 
+        class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover" 
+        style="background-image: url('membership_tier_3.webp'); background-position: center; opacity: 0.6;">
+
+        </div>
+    </MembershipCard>
+        
+</section>
