@@ -1,0 +1,112 @@
+---
+import MembershipCard from "./MembershipCard.astro";
+---
+
+<section
+  class={`
+    md:w-full md:h-screen 
+    md:grid md:grid-cols-3 md:grid-rows-1 md:gap-4
+    md:mx-auto md:p-20 md:pt-32 
+
+    w-full h-screen
+    grid grid-cols-4 grid-rows-3 gap-4
+    pt-24 
+ `}
+>
+  <MembershipCard price="$200">
+    <div
+      slot="image"
+      class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover"
+      style="background-image: url('membership_tier_1.webp'); background-position: center; opacity: 0.6;"
+    >
+    </div>
+
+    <div slot="content" class="flex flex-col items-center gap-4">
+      <div class="flex gap-2 items-center">
+        <span class="uppercase font-bold items-center text-3xl">2</span>
+        <span class="uppercase font-bold items-center text-3xl text-red-700"
+          >Semanas</span
+        >
+      </div>
+      <p class="text-lg pl-3 text-balance">
+        Ideal para principiantes y avanzados que quieran probar el gimnasio y
+        sus instalaciones sin compromiso.
+      </p>
+      <div class="flex items-start">
+        <h2 class="text-xl font-bold uppercase">Beneficios:</h2>
+      </div>
+      <ul class="list-disc text-lg">
+        <li>Acceso a todas las áreas del gimnasio.</li>
+        <li>Rutinas personalizadas.</li>
+        <li>Plan alimenticio personalizado.</li>
+        <li>Acceso a la tienda oficial.</li>
+      </ul>
+    </div>
+  </MembershipCard>
+
+  <MembershipCard price="$300">
+    <div
+      slot="image"
+      class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover"
+      style="background-image: url('membership_tier_2.webp'); background-position: center; opacity: 0.6;"
+    >
+    </div>
+    <div slot="content" class="flex flex-col items-center gap-4">
+      <div class="flex gap-2 items-center">
+        <span class="uppercase font-bold items-center text-3xl">1</span>
+        <span class="uppercase font-bold items-center text-3xl text-red-700"
+          >Mes</span
+        >
+      </div>
+      <p class="text-lg pl-3">
+        Ideal para personas que quieren probar la consistencia antes de
+        comprometerse a un periodo más largo.
+      </p>
+      <div class="flex items-start">
+        <h2 class="text-xl font-bold uppercase">Beneficios:</h2>
+      </div>
+      <ul class="list-disc text-lg items-start">
+        <li>Beneficios de la membresía anterior.</li>
+        <li>
+          Descuento del <strong class="text-red-700">10%</strong> en suplementos.
+        </li>
+        <li>Descuentos especiales en los servicios.</li>
+        <li>Asesorías prioritarias.</li>
+      </ul>
+    </div>
+  </MembershipCard>
+
+  <MembershipCard price="$1500">
+    <div
+      slot="image"
+      class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover"
+      style="background-image: url('membership_tier_3.webp'); background-position: center; opacity: 0.6;"
+    >
+    </div>
+    <div slot="content" class="flex flex-col items-center gap-4">
+      <div class="flex gap-2 items-center">
+        <span class="uppercase font-bold items-center text-3xl">6</span>
+        <span class="uppercase font-bold items-center text-3xl text-red-700"
+          >Meses</span
+        >
+      </div>
+      <p class="text-lg pl-3">
+        Ideal para personas que quieren comprometerse en su transformación
+        física a largo plazo así como para tener una mejor calidad y estilo de
+        vida.
+      </p>
+      <div class="flex items-start">
+        <h2 class="text-xl font-bold uppercase">Beneficios:</h2>
+      </div>
+      <ul class="list-disc text-lg items-start">
+        <li>Beneficios de la membresía anterior.</li>
+        <li>
+          Descuento del <strong class="text-red-700">10%</strong> en toda la tienda.
+        </li>
+        <li>Seguimiento de progreso semestral.</li>
+        <li>Apoyo en competiciones.</li>
+        <li>Acceso a eventos exclusivos.</li>
+      </ul>
+    </div>
+  </MembershipCard>
+</section>

@@ -1,31 +1,29 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import NavigationBar from '../components/NavBar.astro';
-import Bento from '../components/Bento.astro';
-import Membership from '../components/MembershipBento.astro';
-import Footer from '../components/Footer.astro';
+import Layout from "../layouts/Layout.astro";
+import NavigationBar from "../components/NavigationBar.astro";
+import Bento from "../components/Bento.astro";
+import Membership from "../components/MembershipSection.astro";
+import Footer from "../components/Footer.astro";
+import RegisterPopUp from "../components/RegisterPopUp.astro";
 ---
 
 <Layout title="Bienvenido">
-	<main class="text-white">
-		<NavigationBar/>
-		<section id="bento">
-			<Bento/>
-		</section>
+  <main class="text-white">
+    <NavigationBar />
+    <section id="bento" class="section">
+      <Bento />
+    </section>
 
-		<section id="membership" class="h-screen">
-			
-			<Membership/>
-		</section>
-		<!-- TODO: Crear esta sección -->
-		<section id="about" class="h-screen">
-			<a href="#bento"> <h2 class="text-white"> About</h2></a>
-		</section>
-		<!-- TODO: Crear esta sección -->
-		<section id="nutrition" class="h-screen">
-			<a href="#bento"> <h2 class="text-white"> Nutrittion</h2></a>
-		</section>
-	</main>
-	<Footer/>
+    <section id="membership" class="section h-screen">
+      <Membership />
+    </section>
+    <!-- TODO: Crear esta sección -->
+    <section id="nutrition" class="section h-screen">
+      <a href="#bento"> <h2 class="text-white">Nutrition</h2></a>
+    </section>
+  </main>
+  <!-- TODO: Crear esta sección -->
+  <a href="#bento"> <h2 class="text-white">About</h2></a>
+  <section id="about" class="section h-screen"></section>
+  <Footer />
 </Layout>
-
