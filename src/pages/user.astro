@@ -1,5 +1,12 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "@/layouts/Layout.astro";
+import NavigationBar from "@/components/NavigationBar.astro";
+import { getSession } from "auth-astro/server";
+
+const session = await getSession(Astro.request);
+const username = session?.user?.name || "Invitado";
 ---
 
-<Layout title="" />
+<Layout title=`Bienvenido ${username}`>
+  <NavigationBar />
+</Layout>

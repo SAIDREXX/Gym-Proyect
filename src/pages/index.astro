@@ -1,10 +1,9 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import NavigationBar from "../components/NavigationBar.astro";
-import Bento from "../components/Bento.astro";
-import Membership from "../components/MembershipSection.astro";
-import Footer from "../components/Footer.astro";
-import RegisterPopUp from "../components/RegisterPopUp.astro";
+import Layout from "@/layouts/Layout.astro";
+import NavigationBar from "@/components/NavigationBar.astro";
+import Bento from "@/components/Bento.astro";
+import Membership from "@/components/MembershipSection.astro";
+import Footer from "@/components/Footer.astro";
 ---
 
 <Layout title="Bienvenido">
@@ -18,9 +17,7 @@ import RegisterPopUp from "../components/RegisterPopUp.astro";
       <Membership />
     </section>
     <!-- TODO: Crear esta sección -->
-    <section id="nutrition" class="section h-screen">
-      <a href="#bento"> <h2 class="text-white">Nutrition</h2></a>
-    </section>
+    <section id="nutrition" class="section h-screen"></section>
   </main>
   <!-- TODO: Crear esta sección -->
   <a href="#bento"> <h2 class="text-white">About</h2></a>

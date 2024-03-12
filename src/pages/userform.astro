@@ -1,0 +1,141 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getSession } from "auth-astro/server";
+
+const session = await getSession(Astro.request);
+
+const email = session?.user?.email;
+---
+
+<Layout title="Actualiza tus Datos">
+  <main class="flex items-center justify-center">
+    <div class="bg-white">
+      <form class="form py-2">
+        <div>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Nombre(s)"
+            class="w-full p-2 border border-gray-300 rounded-md"
+            required
+          />
+
+          <input
+            type="text"
+            name="first_lastname"
+            id="first_lastname"
+            placeholder="Primer apellido"
+            class="w-full p-2 border border-gray-300 rounded-md mt-2"
+            required
+          />
+
+          <input
+            type="text"
+            name="second_lastname"
+            id="second_lastname"
+            placeholder="Segundo apellido"
+            class="w-full p-2 border border-gray-300 rounded-md mt-2"
+            required
+          />
+
+          <select name="genre" id="genre">
+            <option value="" selected disabled>Selecciona tu género</option>
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+          </select>
+
+          <input
+            type="text"
+            name="age"
+            id="age"
+            placeholder="Edad"
+            class="w-full p-2 border border-gray-300 rounded-md mt-2"
+            required
+          />
+
+          <select name="experience" id="experience">
+            <option value="" selected disabled>Selecciona tu experiencia</option
+            >
+            <option value="1">Principiante</option>
+            <option value="2">Intermedio</option>
+            <option value="3">Avanzado</option>
+          </select>
+
+          <input
+            type="text"
+            name="weight"
+            id="weight"
+            placeholder="Peso (kg)"
+            class="w-full p-2 border border-gray-300 rounded-md mt-2"
+            required
+          />
+
+          <input
+            type="text"
+            name="height"
+            id="height"
+            placeholder="Estatura (cm)"
+            class="w-full p-2 border border-gray-300 rounded-md mt-2"
+            required
+          />
+
+          <input
+            type="text"
+            name="email"
+            id="email"
+            placeholder="Correo electrónico"
+            class="w-full p-2 border border-gray-300 rounded-md mt-2"
+            value={email}
+            required
+            readonly
+          />
+
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Contraseña"
+            class="w-full p-2 border border-gray-300 rounded-md mt-2"
+            required
+          />
+
+          <input
+            type="password"
+            name="password_confirmation"
+            id="password_confirmation"
+            placeholder="Confirmar contraseña"
+            class="w-full p-2 border border-gray-300 rounded-md mt-2"
+            required
+          />
+        </div>
+        <menu>
+          <button>Confirm</button>
+        </menu>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const formElement = document.querySelector(".form");
+
+    formElement?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(formElement as HTMLFormElement);
+      const data = Object.fromEntries(formData);
+
+      const response = await fetch("api/form", {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data }),
+      });
+      if (response.ok) {
+        return window.location.replace("/user");
+      }
+    });
+  </script>
+</Layout>

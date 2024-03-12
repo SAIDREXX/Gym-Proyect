@@ -1,0 +1,113 @@
+---
+interface Props {
+  email: string;
+}
+
+const { email } = Astro.props;
+---
+
+<section class="md:pt-32 md:w-[32rem] backdrop-blur-sm">
+  <div class="flex flex-col items-center bg-white text-black p-4 rounded-xl">
+    <h1 class="uppercase text-2xl font-bold text-red-700">Regístrate</h1>
+
+    <form class="py-2" action="" method="post">
+      <div>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Nombre(s)"
+          class="w-full p-2 border border-gray-300 rounded-md"
+          required
+        />
+
+        <input
+          type="text"
+          name="first_lastname"
+          id="first_lastname"
+          placeholder="Primer apellido"
+          class="w-full p-2 border border-gray-300 rounded-md mt-2"
+          required
+        />
+
+        <input
+          type="text"
+          name="second_lastname"
+          id="second_lastname"
+          placeholder="Segundo apellido"
+          class="w-full p-2 border border-gray-300 rounded-md mt-2"
+          required
+        />
+
+        <select name="genre" id="genre">
+          <option value="" selected disabled>Selecciona tu género</option>
+          <option value="M">Masculino</option>
+          <option value="F">Femenino</option>
+        </select>
+
+        <input
+          type="text"
+          name="age"
+          id="age"
+          placeholder="Edad"
+          class="w-full p-2 border border-gray-300 rounded-md mt-2"
+          required
+        />
+
+        <select name="experience" id="experience">
+          <option value="" selected disabled>Selecciona tu experiencia</option>
+          <option value="1">Principiante</option>
+          <option value="2">Intermedio</option>
+          <option value="3">Avanzado</option>
+        </select>
+
+        <input
+          type="text"
+          name="weight"
+          id="weight"
+          placeholder="Peso (kg)"
+          class="w-full p-2 border border-gray-300 rounded-md mt-2"
+          required
+        />
+
+        <input
+          type="text"
+          name="height"
+          id="height"
+          placeholder="Estatura (cm)"
+          class="w-full p-2 border border-gray-300 rounded-md mt-2"
+          required
+        />
+
+        <input
+          type="text"
+          name="email"
+          id="email"
+          placeholder="Correo electrónico"
+          class="w-full p-2 border border-gray-300 rounded-md mt-2"
+          value={email}
+          required
+          readonly
+        />
+
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Contraseña"
+          class="w-full p-2 border border-gray-300 rounded-md mt-2"
+          required
+        />
+
+        <input
+          type="password"
+          name="password_confirmation"
+          id="password_confirmation"
+          placeholder="Confirmar contraseña"
+          class="w-full p-2 border border-gray-300 rounded-md mt-2"
+          required
+        />
+      </div>
+    </form>
+  </div>
+</section>

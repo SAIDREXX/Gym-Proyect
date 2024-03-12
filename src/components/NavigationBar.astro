@@ -88,7 +88,6 @@ const session = await getSession(Astro.request);
 
   const $button = document.querySelector("#login-button");
   $button?.addEventListener("click", async (event) => {
-    event.preventDefault();
-    await signIn("google");
+    await signIn("google", { callbackUrl: "/userform" });
   });
 </script>
