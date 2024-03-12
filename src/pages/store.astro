@@ -4,6 +4,7 @@ import NavigationBar from "../components/NavigationBar.astro";
 import StoreItem from "../components/StoreItem.astro";
 import { client } from "../db/client";
 const { rows } = await client.execute("SELECT * from merch ");
+console.log(rows);
 ---
 
 <Layout title="Tienda Oficial">

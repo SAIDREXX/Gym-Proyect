@@ -1,15 +1,17 @@
 ---
 interface Props {
-	name: string;
-	price: string;
-	description: string;
-	image: string;
+  class?: string;
+  name: string;
+  price: string;
+  description: string;
+  image: string;
 }
 
 const { name, price, description, image } = Astro.props;
 ---
+
 <article
-class= {`
+  class={`
 	${Astro.props.class}
 	relative rounded-xl
 	backdrop-blur-sm
@@ -18,13 +20,14 @@ class= {`
 	overflow-hidden
 	group
 	`}
-
 >
-<slot name="image" />
-<div class="select-none flex flex-col gap-1 p-6 text-lg z-20 h-full bg-white">
+  <div class="select-none flex flex-col gap-1 p-6 text-lg z-20 h-full bg-white">
+    <div>
+      <img src={image} alt="" />
+    </div>
     <h2 class="text-black">{name}</h2>
-           
-    <slot name="content" />
-</div>
-</article>
+    <h2 class="text-black">${price}</h2>
 
+    <slot name="content" />
+  </div>
+</article>
