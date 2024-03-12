@@ -1,0 +1,32 @@
+---
+interface Props {
+  class?: string;
+  title?: string;
+  title_alternative?: string;
+  href?: string;
+}
+
+const { title, title_alternative, href } = Astro.props;
+---
+
+<article
+  class={`
+ ${Astro.props.class}
+ relative rounded-xl
+ overflow-hidden duration-200 transition-transform hover:scale-105 ease-in-out
+ group
+ `}
+>
+  <a href={href}>
+    <slot name="image" />
+    <div
+      class="flex flex-row select-none gap-3 p-6 text-lg z-20 h-full items-center justify-center bg-[#2C2E33]"
+    >
+      <h2 class=`font-bold ${Astro.props.class} tracking-wide`>{title}</h2>
+      <h2 class="font-bold text-3xl tracking-wide text-[#FF3E01]">
+        {title_alternative}
+      </h2>
+      <slot class="..." name="content" />
+    </div>
+  </a>
+</article>

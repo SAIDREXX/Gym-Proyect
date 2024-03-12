@@ -1,14 +1,29 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import NavigationBar from "@/components/NavigationBar.astro";
-import Bento from "@/components/Bento.astro";
+import Bento from "@/components/MainBernto.astro";
+import AboutBento from "@/components/AboutBento.astro";
+import NutritionBento from "@/components/NutritionBento.astro";
 import Membership from "@/components/MembershipSection.astro";
 import Footer from "@/components/Footer.astro";
+import { getSession } from "auth-astro/server";
+import { client } from "@/db/client";
+const session = await getSession(Astro.request);
+const username = session?.user?.name || "Invitado";
+let registered = false;
+let email = session?.user?.email || "";
+const { rows } = await client.execute({
+  sql: "SELECT * FROM users WHERE email = ?",
+  args: [email],
+});
+if (rows.length != 0) {
+  registered = true;
+}
 ---
 
 <Layout title="Bienvenido">
   <main class="text-white">
-    <NavigationBar />
+    <NavigationBar register={registered} />
     <section id="bento" class="section">
       <Bento />
     </section>
@@ -16,11 +31,14 @@ import Footer from "@/components/Footer.astro";
     <section id="membership" class="section h-screen">
       <Membership />
     </section>
-    <!-- TODO: Crear esta sección -->
-    <section id="nutrition" class="section h-screen"></section>
+
+    <section id="nutrition" class="section h-screen">
+      <NutritionBento />
+    </section>
   </main>
   <!-- TODO: Crear esta sección -->
-  <a href="#bento"> <h2 class="text-white">About</h2></a>
-  <section id="about" class="section h-screen"></section>
-  <Footer />
+
+  <section id="about" class="section h-screen">
+    <AboutBento />
+  </section>
 </Layout>

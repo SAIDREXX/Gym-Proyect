@@ -1,7 +1,14 @@
 ---
+interface Props {
+  email?: string;
+  register?: boolean;
+}
+
 import RegisterPopUp from "./RegisterPopUp.astro";
 import { getSession } from "auth-astro/server";
 const session = await getSession(Astro.request);
+
+const { email, register } = Astro.props;
 ---
 
 <header
@@ -47,9 +54,17 @@ const session = await getSession(Astro.request);
         >
       </li>
       <li>
-        <a id="login-button" class="bg-red-700 rounded-full" href="#"
-          >¡Comienza Ya!</a
-        >
+        {
+          register ? (
+            <a id="logout-button" class="bg-red-700 rounded-full" href="#">
+              ¡Cerrar Sesión!
+            </a>
+          ) : (
+            <a id="login-button" class="bg-red-700 rounded-full" href="#">
+              ¡Comienza Ya!
+            </a>
+          )
+        }
       </li>
       <li>
         <a href="#">
@@ -85,9 +100,15 @@ const session = await getSession(Astro.request);
 
 <script>
   const { signIn } = await import("auth-astro/client");
+  import { signOut } from "auth-astro/client";
 
   const $button = document.querySelector("#login-button");
   $button?.addEventListener("click", async (event) => {
     await signIn("google", { callbackUrl: "/userform" });
+  });
+
+  const $logoutButton = document.querySelector("#logout-button");
+  $logoutButton?.addEventListener("click", async (event) => {
+    await signOut({ callbackUrl: "/" });
   });
 </script>

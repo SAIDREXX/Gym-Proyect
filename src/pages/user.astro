@@ -2,11 +2,20 @@
 import Layout from "@/layouts/Layout.astro";
 import NavigationBar from "@/components/NavigationBar.astro";
 import { getSession } from "auth-astro/server";
-
+import { client } from "../db/client";
 const session = await getSession(Astro.request);
 const username = session?.user?.name || "Invitado";
+let email = session?.user?.email || "";
+const { rows } = await client.execute({
+  sql: "SELECT * FROM users WHERE email = ?",
+  args: [email],
+});
+if (rows.length != 0) {
+}
 ---
 
 <Layout title=`Bienvenido ${username}`>
-  <NavigationBar />
+  <main class="text-white">
+    <NavigationBar email=`${email}` />
+  </main>
 </Layout>

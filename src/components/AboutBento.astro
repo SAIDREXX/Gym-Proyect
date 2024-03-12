@@ -1,0 +1,28 @@
+---
+import AboutBentoItem from "@/components/AboutBentoItem.astro";
+---
+
+<section
+  class={`
+  md:w-full md:h-screen 
+  md:grid md:grid-cols-3 md:grid-rows-6 md:gap-4
+  md:mx-auto md:p-20 md:pt-32 
+
+  w-full h-screen
+  grid grid-cols-4 grid-rows-3 gap-4
+  pt-24
+`}
+>
+  <AboutBentoItem
+    class="md:row-span-2 cursor-pointer uppercase text-redgym font-black"
+    title="+5"
+    title_alternative="Sucursales"
+  >
+    <div
+      slot="image"
+      class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover bg-no-repeat"
+      style="background-image: url('bento5.webp'); background-position: center; background-position: center; opacity: 0.15;"
+    >
+    </div>
+  </AboutBentoItem>
+</section>
