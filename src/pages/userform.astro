@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getSession } from "auth-astro/server";
+import NavigationBar from "@/components/NavigationBar.astro";
 
 const session = await getSession(Astro.request);
 
@@ -8,16 +9,21 @@ const email = session?.user?.email;
 ---
 
 <Layout title="Actualiza tus Datos">
-  <main class="flex items-center justify-center">
-    <div class="bg-white">
-      <form class="form py-2">
-        <div>
+  <main
+    class="text-white flex items-center justify-center h-[calc(100vh-1.5rem)]"
+  >
+    <NavigationBar />
+    <div
+      class="flex justify-center items-center max-w-[36rem] mt-24 bg-white rounded-xl"
+    >
+      <form class="form py-2 text-layoutColor">
+        <div class="px-3">
           <input
             type="text"
             name="name"
             id="name"
             placeholder="Nombre(s)"
-            class="w-full p-2 border border-gray-300 rounded-md"
+            class="w-full p-2 border-b-2 border-redgym mt-2"
             required
           />
 
@@ -26,7 +32,7 @@ const email = session?.user?.email;
             name="first_lastname"
             id="first_lastname"
             placeholder="Primer apellido"
-            class="w-full p-2 border border-gray-300 rounded-md mt-2"
+            class="w-full p-2 border-b-2 border-redgym mt-2"
             required
           />
 
@@ -35,39 +41,25 @@ const email = session?.user?.email;
             name="second_lastname"
             id="second_lastname"
             placeholder="Segundo apellido"
-            class="w-full p-2 border border-gray-300 rounded-md mt-2"
+            class="w-full p-2 border-b-2 border-redgym mt-2"
             required
           />
-
-          <select name="genre" id="genre">
-            <option value="" selected disabled>Selecciona tu género</option>
-            <option value="M">Masculino</option>
-            <option value="F">Femenino</option>
-          </select>
 
           <input
             type="text"
             name="age"
             id="age"
             placeholder="Edad"
-            class="w-full p-2 border border-gray-300 rounded-md mt-2"
+            class="w-full p-2 border-b-2 border-redgym mt-2"
             required
           />
-
-          <select name="experience" id="experience">
-            <option value="" selected disabled>Selecciona tu experiencia</option
-            >
-            <option value="1">Principiante</option>
-            <option value="2">Intermedio</option>
-            <option value="3">Avanzado</option>
-          </select>
 
           <input
             type="text"
             name="weight"
             id="weight"
             placeholder="Peso (kg)"
-            class="w-full p-2 border border-gray-300 rounded-md mt-2"
+            class="w-full p-2 border-b-2 border-redgym mt-2"
             required
           />
 
@@ -76,7 +68,7 @@ const email = session?.user?.email;
             name="height"
             id="height"
             placeholder="Estatura (cm)"
-            class="w-full p-2 border border-gray-300 rounded-md mt-2"
+            class="w-full p-2 border-b-2 border-redgym mt-2"
             required
           />
 
@@ -85,7 +77,7 @@ const email = session?.user?.email;
             name="email"
             id="email"
             placeholder="Correo electrónico"
-            class="w-full p-2 border border-gray-300 rounded-md mt-2"
+            class="w-full p-2 border-b-2 border-redgym mt-2"
             value={email}
             required
             readonly
@@ -96,21 +88,39 @@ const email = session?.user?.email;
             name="password"
             id="password"
             placeholder="Contraseña"
-            class="w-full p-2 border border-gray-300 rounded-md mt-2"
+            class="w-full p-2 border-b-2 border-redgym t-2"
             required
           />
 
           <input
+            class="w-full p-2 border-b-2 border-redgym t-2"
             type="password"
             name="password_confirmation"
             id="password_confirmation"
             placeholder="Confirmar contraseña"
-            class="w-full p-2 border border-gray-300 rounded-md mt-2"
             required
           />
+          <div class="flex justify-between pt-2 text-black">
+            <select name="experience" id="experience">
+              <option value="" selected disabled
+                >Selecciona tu experiencia</option
+              >
+              <option value="1">Principiante</option>
+              <option value="2">Intermedio</option>
+              <option value="3">Avanzado</option>
+            </select>
+
+            <select name="genre" id="genre">
+              <option value="" selected disabled>Selecciona tu género</option>
+              <option value="M">Masculino</option>
+              <option value="F">Femenino</option>
+            </select>
+          </div>
         </div>
-        <menu>
-          <button>Confirm</button>
+        <menu class="flex pt-2 justify-center">
+          <button class="bg-white px-4 py-2 rounded-xl box-content text-redgym"
+            >Envíar</button
+          >
         </menu>
       </form>
     </div>
@@ -136,6 +146,30 @@ const email = session?.user?.email;
       if (response.ok) {
         return window.location.replace("/user");
       }
+    });
+
+    const inputs = [
+      "name",
+      "first_lastname",
+      "second_lastname",
+      "age",
+      "weight",
+      "height",
+      "email",
+      "password",
+      "password_confirmation",
+    ];
+
+    inputs.forEach((inputId) => {
+      const inputElement = document.getElementById(inputId) as HTMLInputElement;
+      inputElement?.addEventListener("input", function () {
+        if (inputElement.value.length > 0) {
+          inputElement.classList.remove("border-redgym");
+          inputElement.classList.add("border-green-400");
+        } else {
+          inputElement.style.borderBottom = "2px solid #FF0000";
+        }
+      });
     });
   </script>
 </Layout>

@@ -56,11 +56,11 @@ const { email, register } = Astro.props;
       <li>
         {
           register ? (
-            <a id="logout-button" class="bg-red-700 rounded-full" href="#">
-              ¡Cerrar Sesión!
+            <a id="menu-button" class="bg-red-700 rounded-full cursor-pointer">
+              Tú Espacio
             </a>
           ) : (
-            <a id="login-button" class="bg-red-700 rounded-full" href="#">
+            <a id="login-button" class="bg-red-700 rounded-full cursor-pointer">
               ¡Comienza Ya!
             </a>
           )
@@ -96,19 +96,56 @@ const { email, register } = Astro.props;
       </li>
     </ul>
   </nav>
+
+  <dialog class="mr-[7.5rem] mt-20 p-4 rounded-lg">
+    <form method="dialog">
+      <ul class="[&>li]:py-2">
+        <li><button id="profile-button">Perfil</button></li>
+        <li><a href="#">Rutinas</a></li>
+        <li><a href="#">Alimentación</a></li>
+        <li><a href="#">Membresía</a></li>
+        <li>
+          <button id="logout-button" class="hover:text-redgym duration-150"
+            >Cerrar Sesión</button
+          >
+        </li>
+      </ul>
+    </form>
+  </dialog>
 </header>
 
 <script>
   const { signIn } = await import("auth-astro/client");
-  import { signOut } from "auth-astro/client";
+  const { signOut } = await import("auth-astro/client");
 
   const $button = document.querySelector("#login-button");
   $button?.addEventListener("click", async (event) => {
     await signIn("google", { callbackUrl: "/userform" });
   });
 
+  const $menu = document.querySelector("#menu-button");
+  const $dialog = document.querySelector("dialog");
+  $menu?.addEventListener("click", () => {
+    if ($dialog?.open) {
+      $dialog.close();
+    } else {
+      $dialog?.showModal();
+    }
+  });
+
   const $logoutButton = document.querySelector("#logout-button");
-  $logoutButton?.addEventListener("click", async (event) => {
+  $logoutButton?.addEventListener("click", async () => {
     await signOut({ callbackUrl: "/" });
+  });
+
+  const $profileButton = document.querySelector("#profile-button");
+  $profileButton?.addEventListener("click", () => {
+    window.location.href = "/user";
+  });
+
+  window.addEventListener("click", (event) => {
+    if (event.target === $dialog) {
+      $dialog?.close();
+    }
   });
 </script>

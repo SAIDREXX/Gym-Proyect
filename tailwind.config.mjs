@@ -6,7 +6,8 @@ export default {
       colors: {
         redgym: "#F70000",
         orange: "#FF3E01",
-        greengym: "#00ba32"
+        greengym: "#00ba32",
+        layoutColor: "#13151a"
       },
       gridTemplateRows: {
         16: "repeat(22, minmax(0, 1fr))",

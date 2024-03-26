@@ -6,16 +6,18 @@ import { client } from "../db/client";
 const session = await getSession(Astro.request);
 const username = session?.user?.name || "Invitado";
 let email = session?.user?.email || "";
+let registered = false;
 const { rows } = await client.execute({
   sql: "SELECT * FROM users WHERE email = ?",
   args: [email],
 });
 if (rows.length != 0) {
+  registered = true;
 }
 ---
 
 <Layout title=`Bienvenido ${username}`>
   <main class="text-white">
-    <NavigationBar email=`${email}` />
+    <NavigationBar email=`${email}` register={registered} />
   </main>
 </Layout>
