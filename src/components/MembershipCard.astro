@@ -1,10 +1,7 @@
 ---
 interface Props {
   class?: string;
-  price: string;
 }
-
-const { price } = Astro.props;
 ---
 
 <article
@@ -29,15 +26,11 @@ const { price } = Astro.props;
       class="backw absolute flex flex-col items-center justify-between p-6 w-full h-full"
     >
       <slot name="content" />
-      <a
-        class="bg-red-700 text-xl font-semibold text-white p-2 px-6 rounded-full"
-        href="#"
-      >
-        <h2>{price}</h2>
-      </a>
     </div>
   </div>
 </article>
+
+<script></script>
 
 <style>
   .card {

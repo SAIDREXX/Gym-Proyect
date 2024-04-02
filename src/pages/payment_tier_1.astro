@@ -2,12 +2,11 @@
 import Layout from "@/layouts/Layout.astro";
 import NavigationBar from "@/components/NavigationBar.astro";
 import { getSession } from "auth-astro/server";
-import { client } from "../db/client";
-import UserBento from "@/components/UserProfileBento/UserBento.astro";
+import { client } from "@/db/client";
+
 const session = await getSession(Astro.request);
-const username = session?.user?.name || "Invitado";
-let email = session?.user?.email || "";
 let registered = false;
+let email = session?.user?.email || "";
 const { rows } = await client.execute({
   sql: "SELECT * FROM users WHERE email = ?",
   args: [email],
@@ -17,9 +16,12 @@ if (rows.length != 0) {
 }
 ---
 
-<Layout title=`Bienvenido ${username}`>
-  <main class="text-white">
-    <NavigationBar email=`${email}` register={registered} />
-    <UserBento> a </UserBento>
+<Layout title="Confirme su pago">
+  <main class="text-white flex items-end justify-center">
+    <NavigationBar register={registered} />
+    <article
+      class="h-[calc(100vh-13rem)] w-[1024px] mt-32 bg-white rounded-3xl"
+    >
+    </article>
   </main>
 </Layout>

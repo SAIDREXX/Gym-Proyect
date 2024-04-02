@@ -1,0 +1,95 @@
+---
+import UserBentoItem from "./UserBentoItem.astro";
+import Countdown from "./Countdown.astro";
+
+import { getSession } from "auth-astro/server";
+const session = await getSession(Astro.request);
+const username = session?.user?.name || "Invitado";
+---
+
+<section
+  class={`
+    md:w-full md:h-screen 
+    md:grid md:grid-cols-3 md:grid-rows-6 md:gap-4
+    md:mx-auto md:p-20 md:pt-32 
+
+    w-full h-screen
+    grid grid-cols-4 grid-rows-3 gap-4
+    pt-24
+ `}
+>
+  <UserBentoItem class="md:row-span-4">
+    <div
+      slot="image"
+      class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover"
+      style="background-image: url('bento.webp'); background-position: center; opacity: 0.6;"
+    >
+    </div>
+  </UserBentoItem>
+
+  <UserBentoItem class="md:row-span-2 text-[#F70000] cursor-pointer">
+    <div
+      slot="image"
+      class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover"
+      style="background-image: url('bento3.webp'); background-position: center; opacity: 0.15;"
+    >
+    </div>
+
+    <div slot="content">
+      <Countdown />
+    </div>
+  </UserBentoItem>
+
+  <UserBentoItem class="md:row-span-4">
+    <div
+      slot="image"
+      class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover bg-no-repeat"
+      style="background-image: url('bento6.webp'); background-position: center; background-position: center; opacity: 0.6;"
+    >
+    </div>
+  </UserBentoItem>
+
+  <UserBentoItem
+    class="md:row-span-2 cursor-pointer"
+    title={username}
+    href="#about"
+  >
+    <div
+      slot="image"
+      class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover bg-no-repeat"
+      style="background-image: url('bento5.webp'); background-position: center; background-position: center; opacity: 0.15;"
+    >
+    </div>
+  </UserBentoItem>
+
+  <UserBentoItem class="md:row-span-2" title="PATROCINIOS">
+    <div
+      slot="image"
+      class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover"
+      style="background-image: url('bento8.webp'); background-position: center; opacity: 0.15;"
+    >
+    </div>
+  </UserBentoItem>
+
+  <UserBentoItem
+    class="md:row-span-2 cursor-pointer text-red"
+    title="ALIMENTACIÓN"
+    href="#nutrition"
+  >
+    <div
+      slot="image"
+      class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover"
+      style="background-image: url('bento4.webp'); background-position: center; opacity: 0.15;"
+    >
+    </div>
+  </UserBentoItem>
+
+  <UserBentoItem class="md:row-span-2" title="ENTRENADORES">
+    <div
+      slot="image"
+      class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover"
+      style="background-image: url('bento7.webp'); background-position: top; opacity: 0.15;"
+    >
+    </div>
+  </UserBentoItem>
+</section>

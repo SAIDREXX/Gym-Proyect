@@ -1,5 +1,17 @@
 ---
 import MembershipCard from "./MembershipCard.astro";
+import { getSession } from "auth-astro/server";
+import { client } from "../db/client";
+const session = await getSession(Astro.request);
+let registered = false;
+let email = session?.user?.email || "";
+const { rows } = await client.execute({
+  sql: "SELECT * FROM users WHERE email = ?",
+  args: [email],
+});
+if (rows.length != 0) {
+  registered = true;
+}
 ---
 
 <section
@@ -13,7 +25,7 @@ import MembershipCard from "./MembershipCard.astro";
     pt-24 
  `}
 >
-  <MembershipCard price="$200">
+  <MembershipCard>
     <div
       slot="image"
       class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover"
@@ -41,10 +53,28 @@ import MembershipCard from "./MembershipCard.astro";
         <li>Plan alimenticio personalizado.</li>
         <li>Acceso a la tienda oficial.</li>
       </ul>
+      {
+        registered ? (
+          <a
+            id="200"
+            class="bg-red-700 text-xl font-semibold text-white p-2 px-6 rounded-full cursor-pointer"
+            href="payment_tier_1"
+          >
+            <h2>$200</h2>
+          </a>
+        ) : (
+          <a
+            id="200-login"
+            class="bg-red-700 text-xl font-semibold text-white p-2 px-6 rounded-full cursor-pointer"
+          >
+            <h2>$200</h2>
+          </a>
+        )
+      }
     </div>
   </MembershipCard>
 
-  <MembershipCard price="$300">
+  <MembershipCard>
     <div
       slot="image"
       class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover"
@@ -73,10 +103,28 @@ import MembershipCard from "./MembershipCard.astro";
         <li>Descuentos especiales en los servicios.</li>
         <li>Asesorías prioritarias.</li>
       </ul>
+      {
+        registered ? (
+          <a
+            id="300"
+            class="bg-red-700 text-xl font-semibold text-white p-2 px-6 rounded-full cursor-pointer"
+            href="payment_tier_2"
+          >
+            <h2>$300</h2>
+          </a>
+        ) : (
+          <a
+            id="300-login"
+            class="bg-red-700 text-xl font-semibold text-white p-2 px-6 rounded-full cursor-pointer"
+          >
+            <h2>$300</h2>
+          </a>
+        )
+      }
     </div>
   </MembershipCard>
 
-  <MembershipCard price="$1500">
+  <MembershipCard>
     <div
       slot="image"
       class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover"
@@ -107,6 +155,52 @@ import MembershipCard from "./MembershipCard.astro";
         <li>Apoyo en competiciones.</li>
         <li>Acceso a eventos exclusivos.</li>
       </ul>
+      {
+        registered ? (
+          <a
+            id="1500"
+            class="bg-red-700 text-xl font-semibold text-white p-2 px-6 rounded-full cursor-pointer"
+            href="payment_tier_3"
+          >
+            <h2>$1500</h2>
+          </a>
+        ) : (
+          <a
+            id="1500-login"
+            class="bg-red-700 text-xl font-semibold text-white p-2 px-6 rounded-full cursor-pointer"
+          >
+            <h2>$1500</h2>
+          </a>
+        )
+      }
     </div>
   </MembershipCard>
 </section>
+
+<script>
+  const { signIn } = await import("auth-astro/client");
+  const { signOut } = await import("auth-astro/client");
+
+  const $membership200 = document.getElementById("200");
+  const $membership200Login = document.getElementById("200-login");
+  const $membership300 = document.getElementById("300");
+  const $membership300Login = document.getElementById("300-login");
+  const $membership1500 = document.getElementById("1500");
+  const $membership1500Login = document.getElementById("1500-login");
+
+  $membership200Login?.addEventListener("click", async (event) => {
+    await signIn("google", { callbackUrl: "/userform" });
+  });
+
+  $membership300Login?.addEventListener("click", async (event) => {
+    await signIn("google", { callbackUrl: "/userform" });
+  });
+
+  $membership1500Login?.addEventListener("click", async (event) => {
+    await signIn("google", { callbackUrl: "/userform" });
+  });
+
+  $membership200?.addEventListener("click", () => {
+    window.location.href = "payment?membership=200";
+  });
+</script>
