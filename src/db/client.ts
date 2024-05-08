@@ -17,6 +17,8 @@ interface User {
   email: string;
   password: string;
   password_confirmation: string;
+  membership_start: number | null;
+  membership_end: number | null;
 }
 
 
@@ -29,4 +31,14 @@ export const addUser = async (jsonData: User) => {
   })
   
   return result;
+}
+
+export const addMembership = async (jsonData: User) => {
+  console.log(jsonData)
+  const sql = "UPDATE users SET membership_start = ?, membership_end = ? WHERE email = ?";
+  const result = await client.execute({
+    sql: sql,
+    args: [jsonData.membership_start, jsonData.membership_end, jsonData.email],
+  })
+  return result
 }
