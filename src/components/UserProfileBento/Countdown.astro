@@ -1,15 +1,47 @@
-<article>
-  <div>
-    <span>00</span>
-    <span>Días</span>
+---
+import { getSession } from "auth-astro/server";
+import { client } from "@/db/client";
+const session = await getSession(Astro.request);
+const username = session?.user?.name || "Invitado";
+let membershipEnd;
+let email = session?.user?.email || "";
+const { rows } = await client.execute({
+  sql: "SELECT * FROM users WHERE email = ?",
+  args: [email],
+});
+if (rows.length != 0) {
+  membershipEnd = rows[0].membership_end;
+}
+---
+
+<article
+  class="flex flex-row gap-x-1 uppercase font-semibold"
+  data-date={membershipEnd}
+>
+  <div class="flex flex-col justify-center items-center gap-y-1">
+    <span class="text-4xl tabular-nums" data-days>00</span>
+    <span class="text-xs">Días</span>
   </div>
-  <div>
-    <span>00</span>
-    <span>Horas</span>
+
+  <span aria-hidden="true" class="mt-1 font-bold text-xl">:</span>
+
+  <div class="flex flex-col justify-center items-center gap-y-1">
+    <span class="text-4xl tabular-nums" data-hours>00</span>
+    <span class="text-xs">Horas</span>
   </div>
-  <div>
-    <span>00</span>
-    <span>Minutos</span>
+
+  <span aria-hidden="true" class="mt-1 font-bold text-xl">:</span>
+
+  <div class="flex flex-col justify-center items-center gap-y-1">
+    <span class="text-4xl tabular-nums" data-minutes>00</span>
+    <span class="text-xs">Minutos</span>
+  </div>
+
+  <span aria-hidden="true" class="mt-1 font-bold text-xl">:</span>
+
+  <div class="flex flex-col justify-center items-center gap-y-1">
+    <span class="text-4xl tabular-nums text-redgym" data-seconds>00</span>
+    <span class="text-xs">Segundos</span>
   </div>
 </article>
 
@@ -19,6 +51,46 @@
   const HOUR = MINUTE * 60;
   const DAY = HOUR * 24;
 
-  function init() {}
+  function init() {
+    const $countdown = document.querySelector("[data-date]");
+    if (!$countdown) return;
+    const $days = $countdown.querySelector("[data-days]");
+    const $hours = $countdown.querySelector("[data-hours]");
+    const $minutes = $countdown.querySelector("[data-minutes]");
+    const $seconds = $countdown.querySelector("[data-seconds]");
+
+    const timestamp = $countdown.getAttribute("data-date");
+    if (!timestamp) return;
+
+    const date = new Date(+timestamp).getTime();
+
+    const formatTime = (time: number) => {
+      return Math.floor(time).toString().padStart(2, "0");
+    };
+
+    function updateCountdown() {
+      const now = Date.now();
+      const diff = date - now;
+
+      if ($days instanceof HTMLElement) {
+        $days.innerText = formatTime(diff / DAY);
+      }
+
+      if ($hours instanceof HTMLElement) {
+        $hours.innerText = formatTime((diff % DAY) / HOUR);
+      }
+
+      if ($minutes instanceof HTMLElement) {
+        $minutes.innerText = formatTime((diff % HOUR) / MINUTE);
+      }
+
+      if ($seconds instanceof HTMLElement) {
+        $seconds.innerText = formatTime((diff % MINUTE) / SECOND);
+      }
+    }
+
+    setInterval(updateCountdown, SECOND);
+    updateCountdown();
+  }
   init();
 </script>

@@ -1,4 +1,6 @@
 ---
+import { getSession } from "auth-astro/server";
+const session = await getSession(Astro.request);
 import BentoItem from "./MainBentoItem.astro";
 ---
 
@@ -22,18 +24,33 @@ import BentoItem from "./MainBentoItem.astro";
     </div>
   </BentoItem>
 
-  <BentoItem
-    class="md:row-span-2 text-[#F70000] cursor-pointer"
-    title="MEMBRESÍAS"
-    href="#membership"
-  >
-    <div
-      slot="image"
-      class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover"
-      style="background-image: url('bento3.webp'); background-position: center; opacity: 0.15;"
-    >
-    </div>
-  </BentoItem>
+  {
+    !session ? (
+      <BentoItem
+        class="md:row-span-2 text-[#F70000] cursor-pointer"
+        title="MEMBRESÍAS"
+        href="#memberships"
+      >
+        <div
+          slot="image"
+          class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover"
+          style="background-image: url('bento3.webp'); background-position: center; opacity: 0.15;"
+        />
+      </BentoItem>
+    ) : (
+      <BentoItem
+        class="md:row-span-2 text-[#F70000] cursor-pointer"
+        title="MEMBRESÍAS"
+        href="/membership"
+      >
+        <div
+          slot="image"
+          class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover"
+          style="background-image: url('bento3.webp'); background-position: center; opacity: 0.15;"
+        />
+      </BentoItem>
+    )
+  }
 
   <BentoItem class="md:row-span-4">
     <div

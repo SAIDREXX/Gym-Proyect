@@ -27,16 +27,15 @@ const username = session?.user?.name || "Invitado";
     </div>
   </UserBentoItem>
 
-  <UserBentoItem class="md:row-span-2 text-[#F70000] cursor-pointer">
+  <UserBentoItem
+    title={username}
+    class="md:row-span-2 text-[#F70000] cursor-pointer"
+  >
     <div
       slot="image"
       class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover"
       style="background-image: url('bento3.webp'); background-position: center; opacity: 0.15;"
     >
-    </div>
-
-    <div slot="content">
-      <Countdown />
     </div>
   </UserBentoItem>
 
@@ -49,16 +48,15 @@ const username = session?.user?.name || "Invitado";
     </div>
   </UserBentoItem>
 
-  <UserBentoItem
-    class="md:row-span-2 cursor-pointer"
-    title={username}
-    href="#about"
-  >
+  <UserBentoItem class="md:row-span-2 cursor-pointer">
     <div
       slot="image"
       class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover bg-no-repeat"
       style="background-image: url('bento5.webp'); background-position: center; background-position: center; opacity: 0.15;"
     >
+    </div>
+    <div slot="content">
+      <Countdown />
     </div>
   </UserBentoItem>
 

@@ -5,7 +5,6 @@ import Bento from "@/components/MainBento/MainBernto.astro";
 import AboutBento from "@/components/AboutBento/AboutBento.astro";
 import NutritionBento from "@/components/NutritionBento/NutritionBento.astro";
 import Membership from "@/components/MembershipSection.astro";
-import Footer from "@/components/Footer.astro";
 import { getSession } from "auth-astro/server";
 import { client } from "@/db/client";
 const session = await getSession(Astro.request);
@@ -28,9 +27,16 @@ if (rows.length != 0) {
       <Bento />
     </section>
 
-    <section id="membership" class="section h-screen">
-      <Membership />
-    </section>
+    {
+      !registered ? (
+        <section id="membership" class="section h-screen">
+          <div class="flex items-center justify-center">
+            <h1 class="text-2xl font-bold uppercase">Membresías</h1>
+          </div>
+          <Membership />
+        </section>
+      ) : null
+    }
 
     <section id="nutrition" class="section h-screen">
       <NutritionBento />

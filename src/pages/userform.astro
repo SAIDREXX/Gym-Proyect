@@ -46,7 +46,7 @@ const email = session?.user?.email;
           />
 
           <input
-            type="text"
+            type="number"
             name="age"
             id="age"
             placeholder="Edad"
@@ -55,7 +55,7 @@ const email = session?.user?.email;
           />
 
           <input
-            type="text"
+            type="number"
             name="weight"
             id="weight"
             placeholder="Peso (kg)"
@@ -64,7 +64,7 @@ const email = session?.user?.email;
           />
 
           <input
-            type="text"
+            type="number"
             name="height"
             id="height"
             placeholder="Estatura (cm)"
@@ -144,7 +144,7 @@ const email = session?.user?.email;
         body: JSON.stringify({ data }),
       });
       if (response.ok) {
-        return window.location.replace("/user");
+        return window.location.replace("/payment_tier_1");
       }
     });
 

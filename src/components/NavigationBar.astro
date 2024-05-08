@@ -125,6 +125,7 @@ const { email, register } = Astro.props;
 
   const $menu = document.querySelector("#menu-button");
   const $dialog = document.querySelector("dialog");
+
   $menu?.addEventListener("click", () => {
     if ($dialog?.open) {
       $dialog.close();
