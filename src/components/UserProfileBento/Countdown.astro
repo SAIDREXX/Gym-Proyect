@@ -72,6 +72,11 @@ if (rows.length != 0) {
       const now = Date.now();
       const diff = date - now;
 
+      if (diff <= 0) {
+        clearInterval(countdownInterval);
+        return;
+      }
+
       if ($days instanceof HTMLElement) {
         $days.innerText = formatTime(diff / DAY);
       }
@@ -89,7 +94,7 @@ if (rows.length != 0) {
       }
     }
 
-    setInterval(updateCountdown, SECOND);
+    const countdownInterval = setInterval(updateCountdown, SECOND);
     updateCountdown();
   }
   init();

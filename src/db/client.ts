@@ -3,7 +3,9 @@ import { createClient } from "@libsql/client";
 export const client = createClient({
   url: import.meta.env.TURSO_URL,
   authToken: import.meta.env.TURSO_AUTH_TOKEN,
+  
 });
+
 
 interface User {
   name: string;
@@ -30,7 +32,7 @@ export const addUser = async (jsonData: User) => {
     args: [jsonData.name, jsonData.first_lastname, jsonData.second_lastname, jsonData.genre, jsonData.age, jsonData.experience, jsonData.weight, jsonData.height, jsonData.email, jsonData.password],
   })
   
-  return result;
+  return result
 }
 
 export const addMembership = async (jsonData: User) => {
@@ -42,3 +44,4 @@ export const addMembership = async (jsonData: User) => {
   })
   return result
 }
+

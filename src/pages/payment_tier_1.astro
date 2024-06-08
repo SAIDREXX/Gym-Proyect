@@ -3,7 +3,6 @@ import Layout from "@/layouts/Layout.astro";
 import NavigationBar from "@/components/NavigationBar.astro";
 import { getSession } from "auth-astro/server";
 import { client } from "@/db/client";
-import { eq } from "astro:db";
 
 const session = await getSession(Astro.request);
 let registered = false;
@@ -107,6 +106,7 @@ if (rows.length != 0) {
 
       // Actualizar el valor del campo de entrada
       (event.target as HTMLInputElement).value = valor;
+      console.log("✅ El formato de tarjeta es correcto");
     });
 
   document
@@ -121,6 +121,7 @@ if (rows.length != 0) {
       valor = valor.replace(/(\d{2})(?=\d)/g, "$1/");
 
       (event.target as HTMLInputElement).value = valor;
+      console.log("✅ El formato de fecha es correcto");
     });
 
   document.getElementById("cvv")?.addEventListener("input", function (event) {
@@ -131,6 +132,7 @@ if (rows.length != 0) {
     valor = valor.slice(0, 3);
 
     (event.target as HTMLInputElement).value = valor;
+    console.log("✅ El formato de cvv es correcto");
   });
 
   const formElement = document.querySelector(".form");
@@ -159,6 +161,7 @@ if (rows.length != 0) {
       body: JSON.stringify({ data }),
     });
     if (response.ok) {
+      console.log("✅ Pago exitoso");
       return window.location.replace("/");
     }
   });

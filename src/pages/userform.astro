@@ -135,16 +135,21 @@ const email = session?.user?.email;
       const formData = new FormData(formElement as HTMLFormElement);
       const data = Object.fromEntries(formData);
 
-      const response = await fetch("api/form", {
-        method: "POST",
+      if (data.password !== data.password_confirmation) {
+        alert("Las contraseñas no coinciden");
+        return;
+      } else {
+        const response = await fetch("api/form", {
+          method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data }),
-      });
-      if (response.ok) {
-        return window.location.replace("/payment_tier_1");
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data }),
+        });
+        if (response.ok) {
+          return window.location.replace("/membership");
+        }
       }
     });
 

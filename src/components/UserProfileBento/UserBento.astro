@@ -60,7 +60,7 @@ const username = session?.user?.name || "Invitado";
     </div>
   </UserBentoItem>
 
-  <UserBentoItem class="md:row-span-2" title="PATROCINIOS">
+  <UserBentoItem class="md:row-span-2 uppercase" title="Rutinas">
     <div
       slot="image"
       class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover"
@@ -69,11 +69,7 @@ const username = session?.user?.name || "Invitado";
     </div>
   </UserBentoItem>
 
-  <UserBentoItem
-    class="md:row-span-2 cursor-pointer text-red"
-    title="ALIMENTACIÓN"
-    href="#nutrition"
-  >
+  <UserBentoItem class="md:row-span-2 cursor-pointer text-red" title="Lorem">
     <div
       slot="image"
       class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover"
@@ -82,7 +78,11 @@ const username = session?.user?.name || "Invitado";
     </div>
   </UserBentoItem>
 
-  <UserBentoItem class="md:row-span-2" title="ENTRENADORES">
+  <UserBentoItem
+    class="md:row-span-2 uppercase"
+    title="Alimentación"
+    href="#alimentacion"
+  >
     <div
       slot="image"
       class="absolute left-0 top-0 bottom-0 w-full h-full bg-cover"
